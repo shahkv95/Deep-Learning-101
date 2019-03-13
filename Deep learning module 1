@@ -1,0 +1,283 @@
+•	Load the path to the images
+	load pathToImages
+1.	Create an image datastore using an imageDatastore function.
+1.1.	imds = imageDatastore(pathToImages)	
+2.	The montage function can be used to display images in a datastore.
+2.1.	montage(imds)
+3.	Use the googlenet function to load the pretrained network GoogLeNet. Save the result to a variable named net.
+3.1.	net = googlenet
+4.	An augmented image datastore can perform simple preprocessing on an entire collection images. To create this datastore, use the augmentedImageDatastorefunction using your network's image input size as input.
+
+auds = augmentedImageDatastore([r c],imds)
+
+(Preprocess with augmented Image datastore). Create an augmented image datastore from imds that will resize the images to 224-by-224. This size is specified by GoogLeNet's input layer.
+
+4.1.	auds = augmentedImageDatastore([224 224], imds)
+
+5.	The classify function will use a network to predict labels for an image. You can also use an datastore as input to classify many images at once.
+
+label = classify(net,ds)
+
+5.1 predictedLabels = classify(net,auds)
+
+The predicted labels from GoogLeNet are reasonable, but not correct. Pretrained networks are trained on images from many different classes, which may not include classes appropriate to your data set. In the next interaction, you will improve these results using transfer learning.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Transfer Learning
+
+
+Transfer learning is the process of retraining a pretrained network to classify a new set of images. The components needed for transfer learning are: pretrained network layers, training data, and algorithm options. This interaction reviews creating each of these inputs to perform transfer learning with AlexNet.
+ 
+Pretrained networks can classify images into predetermined categories. The data set in this chapter contains specific animals, and the pretrained network has not been trained on these classes. Instead of starting from scratch, you can modify a pretrained network to fit your problem.
+
+This code loads the path to the dataset.
+rng(123)
+load pathToImages
+
+
+1.	The images in this data set are stored in subfolders. The name of each folder is the corresponding label for the images in that folder. Set the 'IncludeSubfolder' and 'LabelSource' options to find and label all the images for your datastore.
+
+ds = imageDatastore(location,...
+'IncludeSubfolders',true,...
+'LabelSource','foldernames')
+Create an image datastore named imds. The image location is stored in the variable pathToImages.
+Set the 'IncludeSubfolders' and 'LabelSource' options to find images in subfolders labeled with the folder names.
+•	imds = imageDatastore(pathToImages,'IncludeSubfolders',true,'LabelSource','foldernames')
+
+
+
+
+2.	During training, the network learns to associate the training images and labels. The network may have a high training accuracy, but a network is only useful if it can generalize to new images. You should use a separate test data set to evaluate if the network can classify images it has not yet seen.
+
+You can split the data set with splitEachLabel.
+
+	[ds1,ds2] = splitEachLabel(imds,p)
+
+The proportion p (a value from 0 to 1) indicates the proportion of images from each label from imds that are contained in ds1. The remaining files are assigned to ds2.
+
+Split the datastore imds into two datastores, trainImgs and testImgs, such that 95% of the files are in trainImgs.
+
+•	[trainImgs , testImgs] = splitEachLabel(imds,0.95)
+
+3.	Create two augmented image datastores that preprocess trainImgs and testImgs to be sized 227-by-227. Name the corresponding datastores trainds and testds.
+
+•	trainds = augmentedImageDatastore([227 227],trainImgs)
+•	testds = augmentedImageDatastore([227 227], testImgs)
+
+
+4.	The layers are stored in the Layers property of a network. Load the pretrained network alexnet and store it in a variable named net. Extract the layers into a variable named layers.
+
+net = alexnet
+layers = net.Layers
+
+5.	You need to modify the final layers from AlexNet to suit your data set. You can replace the fully connected and classification layers in layers using standard array indexing.
+
+	layers(n) = newLayer
+
+When you create a fully connected layer, you should specify the number of output classes.
+
+	fc = fullyConnectedLayer(numClasses)
+
+Classification layers do not require any inputs.
+
+	classificationLayer()
+
+Replace the 23rd element of layers with a new fully connected layer that has five classes.
+
+Replace the last (25th) layer with a new classification layer.
+
+•	layers(23) = fullyConnectedLayer(5)
+•	layers(end) = classificationLayer()
+
+
+6.	Algorithm options control how a network is trained. You can create these options with the trainingOptionsfunction.
+
+	opts = trainingOptions(algorithm,...,'InitialLearnRate',rate)
+
+The first input is the name of the training algorithm to use. A common modification from the default options is to decrease the initial learning rate.
+
+There are many other options you can set. To see the possible training algorithms and other options, refer to the documentation.
+trainingOptions
+Set options for training a deep neural network
+
+Create training options named options. Set the algorithm to 'adam' and the initial learning rate to 0.0001.
+
+•	options = trainingOptions('adam', 'InitialLearnRate', 0.0001)
+
+You have created all the required inputs for transfer learning. This network takes too long to train on a CPU now, but you could perform transfer learning with the command
+
+net = trainNetwork(trainds,layers,options)
+
+If you'd like to review any of these concepts, please refer to chapter 4 of Deep Learning Onramp.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Evaluating a Network
+
+
+This interaction reviews evaluating a deep network using a confusion matrix.
+ It is important for a network to have high training and testing accuracy. A test data set should represent the images a network will encounter after it is deployed. You can evaluate the effectiveness of a classification network by calculating the accuracy on the test set and viewing the confusion matrix.
+
+1.	The first section of the script contains code to split a datastore into two separate datastores. If you would like to see these variables in the Workspace, you can enter the command whos in the script and click the green Runbutton in the Toolstrip.
+
+You can predict the labels for new images with the classify function.
+
+	predictedLabels = classify(net,imds)
+
+Classify the images in testds with the network petnet. Name the predicted labels testPreds.
+•	testPreds = classify(petnet , testds)
+
+2.	You can calculate the testing accuracy by comparing the labels in the test image datastore with the predicted labels from the network.
+
+nnz(trueLabels == predictedLabels) / n
+
+Here n is the number of test images. The nnz function counts the number of non-zero elements, or the number of elements where the true label equals the predicted label.
+
+Calculate the percentage of elements in testPreds that are correct. Get the true labels from testImgs.Labels. Name the result acc.
+
+•	acc = nnz(testImgs.Labels == testPreds) / length(testPreds)
+
+3.	The confusion matrix shows which labels were misclassified.
+
+confusionchart(known,predicted)
+
+
+The x-axis of this matrix is the predicted label, and the y-axis is the known label. For example, in the third row and sixth column, Lucy was misclassified as Susan.
+
+Create the confusion matrix using the known labels as the first input and the predicted labels as the second input.
+
+•	confusionchart(testImgs.Labels , testPreds)
+
+************************************************************************************************************************
+Try to view the misclassified image by comparing testPreds and testImgs.Labels. If you find which index of testImgs was misclassified, you can use the readimage function to view that image.
+
+imshow(readimage(testImgs,idx))
+
+If you'd like more information on evaluating a network, please complete the last few sections of chapter 4 in the Deep Learning Onramp.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+
+
+
+
+
+
+
+SUMMARY
+
+
+ 
+Create a network
+Get training images
+Set training algorithm options
+Perform training
+Use trained network to perform classifications
+Evaluate trained network
+
+
+
+
+
+https://matlabacademy.mathworks.com/R2018b/portal.html?course=mldl#chapter=1&lesson=2&section=4 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Course Roadmap
+The previous exercise reviewed the basics of transfer learning for image classification, demonstrating some fundamental elements of deep learning. In this course you will use different deep network architectures for classification and regression. 
+
+In the first half of this course, you will learn details on neural network theory, network training, and how to improve performance. You will apply these concepts to image applications. 
+
+The second half of the course introduces sequence classification and regression. This is achieved with a different type of deep network called a recurrent network. 
+
+There are two projects in this course where you will try out what you've learned on real-world data sets.
+ 
+ 
+Navigating the Course
+
+You can find the course outline by clicking the course title at the top of the window. 
+
+Press next to continue learning about convolutional neural networks. 
+
+Enjoy the course!
+ 
+
