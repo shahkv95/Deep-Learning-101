@@ -3,6 +3,7 @@
 
 1.	Create an image datastore using an imageDatastore function.
 1.1.	imds = imageDatastore(pathToImages)	
+
 2.	The montage function can be used to display images in a datastore.
 2.1.	montage(imds)
 3.	Use the googlenet function to load the pretrained network GoogLeNet. Save the result to a variable named net.
