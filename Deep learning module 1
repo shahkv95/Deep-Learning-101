@@ -9,6 +9,7 @@
 
 3.	Use the googlenet function to load the pretrained network GoogLeNet. Save the result to a variable named net.
 3.1.	net = googlenet
+
 4.	An augmented image datastore can perform simple preprocessing on an entire collection images. To create this datastore, use the augmentedImageDatastorefunction using your network's image input size as input.
 
 auds = augmentedImageDatastore([r c],imds)
