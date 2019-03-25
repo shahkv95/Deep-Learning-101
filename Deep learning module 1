@@ -28,7 +28,6 @@ The predicted labels from GoogLeNet are reasonable, but not correct. Pretrained 
 
 
 
-
 Transfer Learning
 
 Transfer learning is the process of retraining a pretrained network to classify a new set of images. The components needed for transfer learning are: pretrained network layers, training data, and algorithm options. This interaction reviews creating each of these inputs to perform transfer learning with AlexNet.
