@@ -49,7 +49,6 @@ Set the 'IncludeSubfolders' and 'LabelSource' options to find images in subfolde
 •	imds = imageDatastore(pathToImages,'IncludeSubfolders',true,'LabelSource','foldernames')
 
 
-
 2.	During training, the network learns to associate the training images and labels. The network may have a high training accuracy, but a network is only useful if it can generalize to new images. You should use a separate test data set to evaluate if the network can classify images it has not yet seen.
 
 You can split the data set with splitEachLabel.
