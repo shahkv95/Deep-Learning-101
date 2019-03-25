@@ -39,7 +39,7 @@ rng(123)
 load pathToImages
 
 
-1.	The images in this data set are stored in subfolders. The name of each folder is the corresponding label for the images in that folder. Set the 'IncludeSubfolder' and 'LabelSource' options to find and label all the images for your datastore.
+1.  The images in this data set are stored in subfolders. The name of each folder is the corresponding label for the images in that folder. Set the 'IncludeSubfolder' and 'LabelSource' options to find and label all the images for your datastore.
 
 ds = imageDatastore(location,...
 'IncludeSubfolders',true,...
