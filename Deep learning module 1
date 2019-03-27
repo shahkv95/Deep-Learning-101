@@ -61,6 +61,7 @@ Split the datastore imds into two datastores, trainImgs and testImgs, such that 
 
 •	[trainImgs , testImgs] = splitEachLabel(imds,0.95)
 
+
 3.	Create two augmented image datastores that preprocess trainImgs and testImgs to be sized 227-by-227. Name the corresponding datastores trainds and testds.
 
 •	trainds = augmentedImageDatastore([227 227],trainImgs)
