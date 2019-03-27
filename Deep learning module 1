@@ -111,8 +111,6 @@ You have created all the required inputs for transfer learning. This network tak
 
 net = trainNetwork(trainds,layers,options)
 
-If you'd like to review any of these concepts, please refer to chapter 4 of Deep Learning Onramp.
-
 
 
 
