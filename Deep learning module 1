@@ -1,4 +1,4 @@
-	Load the path to the images
+ 	 Load the path to the images
           load pathToImages
 
 1.	Create an image datastore using an imageDatastore function.
