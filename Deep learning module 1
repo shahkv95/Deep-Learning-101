@@ -114,7 +114,6 @@ net = trainNetwork(trainds,layers,options)
 
 
 
-
 Evaluating a Network
 
 
