@@ -27,7 +27,6 @@ label = classify(net,ds)
 The predicted labels from GoogLeNet are reasonable, but not correct. Pretrained networks are trained on images from many different classes, which may not include classes appropriate to your data set. In the next interaction, you will improve these results using transfer learning.
 
 
-
 Transfer Learning
 
 Transfer learning is the process of retraining a pretrained network to classify a new set of images. The components needed for transfer learning are: pretrained network layers, training data, and algorithm options. This interaction reviews creating each of these inputs to perform transfer learning with AlexNet.
