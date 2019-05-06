@@ -35,7 +35,6 @@ Pretrained networks can classify images into predetermined categories. The data 
 
 This code loads the path to the dataset.
 rng(123)
-
 load pathToImages
 
 
