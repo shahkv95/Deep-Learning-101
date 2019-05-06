@@ -43,6 +43,7 @@ load pathToImages
 ds = imageDatastore(location,...
 'IncludeSubfolders',true,...
 'LabelSource','foldernames')
+
 Create an image datastore named imds. The image location is stored in the variable pathToImages.
 Set the 'IncludeSubfolders' and 'LabelSource' options to find images in subfolders labeled with the folder names.
 •	imds = imageDatastore(pathToImages,'IncludeSubfolders',true,'LabelSource','foldernames')
