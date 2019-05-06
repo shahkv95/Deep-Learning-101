@@ -34,6 +34,7 @@ Transfer learning is the process of retraining a pretrained network to classify 
 Pretrained networks can classify images into predetermined categories. The data set in this chapter contains specific animals, and the pretrained network has not been trained on these classes. Instead of starting from scratch, you can modify a pretrained network to fit your problem.
 
 This code loads the path to the dataset.
+
 rng(123)
 load pathToImages
 
