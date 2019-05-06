@@ -131,7 +131,6 @@ Classify the images in testds with the network petnet. Name the predicted labels
 
 nnz(trueLabels == predictedLabels) / n
 
-
 Here n is the number of test images. The nnz function counts the number of non-zero elements, or the number of elements where the true label equals the predicted label.
 
 Calculate the percentage of elements in testPreds that are correct. Get the true labels from testImgs.Labels. Name the result acc.
