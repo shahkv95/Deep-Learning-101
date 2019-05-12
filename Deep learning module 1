@@ -16,6 +16,7 @@ auds = augmentedImageDatastore([r c],imds)
 
 (Preprocess with augmented Image datastore). Create an augmented image datastore from imds that will resize the images to 224-by-224. This size is specified by GoogLeNet's input layer.
 
+
 4.1.	auds = augmentedImageDatastore([224 224], imds)
 
 5.	The classify function will use a network to predict labels for an image. You can also use an datastore as input to classify many images at once.
