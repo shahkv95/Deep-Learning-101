@@ -1,7 +1,6 @@
 Load the path to the images
         load pathToImages
 
-
 1.	Create an image datastore using an imageDatastore function.
 1.1.	imds = imageDatastore(pathToImages)	
 
