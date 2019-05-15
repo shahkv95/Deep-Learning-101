@@ -5,6 +5,7 @@ Load the path to the images
 
 
 1.	Create an image datastore using an imageDatastore function.
+
 1.1.	imds = imageDatastore(pathToImages)	
 
 2.	The montage function can be used to display images in a datastore.
