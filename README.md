@@ -10,7 +10,6 @@ This repository contents information about the foundation steps required to carr
   CNN Architecture--
   Investigating Predictions
  
- 
  # Managing Collections of Data
     Use the already created and trained network for classification.---
   Image Datastores--
