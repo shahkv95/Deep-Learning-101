@@ -3,7 +3,6 @@ This repository contents information about the foundation steps required to carr
 
 # Deep Learning for image recognition
 
-
 # Using Pretrained networks
     Use the already created and trained network for classification.
   Identify Objects in Some Images--
