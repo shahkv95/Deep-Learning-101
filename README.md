@@ -19,7 +19,6 @@ This repository contents information about the foundation steps required to carr
   Processing Images in a Datastore--
   Create a Datastore Using Subfolders--
   
-  
 #  Performing Transfer Learning
      Modify a pretrained network to classify images into specified classes.---
   Transfer Learning--
