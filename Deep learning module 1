@@ -111,7 +111,6 @@ You have created all the required inputs for transfer learning. This network tak
 net = trainNetwork(trainds,layers,options)
 
 
-
 Evaluating a Network
 
 
