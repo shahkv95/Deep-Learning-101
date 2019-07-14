@@ -155,7 +155,6 @@ imshow(readimage(testImgs,idx))
 If you'd like more information on evaluating a network, please complete the last few sections of chapter 4 in the Deep Learning Onramp.
 
 
-
 SUMMARY
 
  
