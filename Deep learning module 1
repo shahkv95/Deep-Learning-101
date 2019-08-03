@@ -117,6 +117,7 @@ Evaluating a Network
 This interaction reviews evaluating a deep network using a confusion matrix.
  It is important for a network to have high training and testing accuracy. A test data set should represent the images a network will encounter after it is deployed. You can evaluate the effectiveness of a classification network by calculating the accuracy on the test set and viewing the confusion matrix.
 
+
 1.	The first section of the script contains code to split a datastore into two separate datastores. If you would like to see these variables in the Workspace, you can enter the command whos in the script and click the green Runbutton in the Toolstrip.
 
 You can predict the labels for new images with the classify function.
